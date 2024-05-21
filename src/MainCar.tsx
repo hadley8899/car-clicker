@@ -3,12 +3,13 @@ import './CarClickerButton.css';
 
 interface CarClickerButtonProps {
     handleCarClick: () => void;
+    isAnimating: boolean;
 }
 
-const CarClickerButton: React.FC<CarClickerButtonProps> = ({ handleCarClick }) => {
+const CarClickerButton: React.FC<CarClickerButtonProps> = ({ handleCarClick, isAnimating }) => {
     return (
-        <div className="road">
-            <div className="car" onClick={handleCarClick}>
+        <div className={`road ${isAnimating ? 'animate' : ''}`}>
+            <div className={`car ${isAnimating ? 'drive' : ''}`} onClick={handleCarClick}>
                 🚗
             </div>
         </div>

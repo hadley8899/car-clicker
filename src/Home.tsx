@@ -17,8 +17,19 @@ const CarClicker: React.FC = () => {
 
     const [cheatAdder, setCheatAdder] = useState(0);
 
+    const [isAnimating, setIsAnimating] = useState(false);
+
     const handleCarClick = () => {
-        setMiles(prevMiles => prevMiles + engineHp);
+        // If the car is currently moving, Dont allow another click until finished
+        if (isAnimating){
+            return;
+        }
+
+        setIsAnimating(true);
+        setTimeout(() => {
+            setMiles(prevMiles => prevMiles + engineHp);
+            setIsAnimating(false);
+        }, 1000); // Match this duration to the car driving animation, This will need to be more interactive eventually
     };
 
     const handleAutoClickerUpgrade = () => {
@@ -40,7 +51,7 @@ const CarClicker: React.FC = () => {
             setEngineUpgradeCost(prevEngineUpgradeCost => prevEngineUpgradeCost * 2);
             setEngineHp(prevMultiplier => prevMultiplier + currentEngineUpgrades);
         }
-    };
+    }
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -87,7 +98,7 @@ const CarClicker: React.FC = () => {
                     </ul>
                 </div>
                 <div className="col-4 text-center">
-                    <CarClickerButton handleCarClick={handleCarClick}/>
+                    <CarClickerButton handleCarClick={handleCarClick} isAnimating={isAnimating}/>
                 </div>
                 <div className="col-4">
                     <Stats

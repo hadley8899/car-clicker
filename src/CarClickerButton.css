@@ -6,7 +6,7 @@
     overflow: hidden;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start; /* Start the car from the left */
 }
 
 .road::before {
@@ -23,21 +23,20 @@
     );
     top: 50%;
     transform: translateY(-50%);
-    animation: moveRoad 1s linear infinite;
 }
 
 .car {
     font-size: 130px;
     cursor: pointer;
-    animation: bounce 1s infinite;
+    transform:scale(-1, 1);
 }
 
 @keyframes bounce {
     0%, 100% {
-        transform: translateY(0);
+        transform: translateY(0) scale(-1, 1);
     }
     50% {
-        transform: translateY(-10px);
+        transform: translateY(-10px) scale(-1, 1);
     }
 }
 
@@ -46,6 +45,18 @@
         background-position: 0 0;
     }
     100% {
-        background-position: 40px 0;
+        background-position: -40px 0;
     }
+}
+
+.drive {
+    animation: drive 1s linear forwards, bounce 1s infinite;
+}
+
+@keyframes drive {
+
+}
+
+.animate::before {
+    animation: moveRoad 1s linear infinite;
 }
